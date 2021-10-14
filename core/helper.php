@@ -73,3 +73,8 @@ function include_view(string $view)
 {
     include View::resolve($view);
 }
+
+function dd(...$any)
+{
+    var_dump(...$any); die;
+}
