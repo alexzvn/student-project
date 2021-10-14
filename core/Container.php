@@ -48,13 +48,22 @@ class Container
         return self::resolve(self::$instances[$abstract], $parameter);
     }
 
-    public static function resolveMethod($object, $method)
+    public static function resolveMethod($object, $method, array $parameters = [])
     {
         $reflector = new \ReflectionObject($object);
 
-        return array_map(function (ReflectionParameter $parameter) {
-            return static::resolve($parameter->getType()->getName());
-        }, $reflector->getMethod($method)->getParameters());
+        $params = $reflector->getMethod($method)->getParameters();
+
+        for ($i=0; $i < count($params); $i++) {
+            $type = $params[$i]->getType();
+            $type = $type ? $type->getName() : null;
+
+
+
+            $params[$i] = $type ? static::resolve($type) : array_shift($parameters);
+        }
+
+        return $params;
     }
 
     public static function resolve($concrete, $parameter = [])
