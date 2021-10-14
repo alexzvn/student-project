@@ -96,7 +96,7 @@ class Container
 
     private static function resolveDependency(ReflectionParameter $parameter)
     {
-        $dependency = $parameter->getClass();
+        $dependency = $parameter->getType();
 
         if (is_null($dependency)) {
             if ($parameter->isDefaultValueAvailable()) {
@@ -106,6 +106,6 @@ class Container
             }
         }
 
-        return self::make($dependency->name);
+        return self::make($dependency->getName());
     }
 }
