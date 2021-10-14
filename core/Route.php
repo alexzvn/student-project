@@ -50,7 +50,12 @@ class Route
         return $matches;
     }
 
-    public function build()
+    /**
+     * Get ready before handle request
+     *
+     * @return void
+     */
+    public function prepare()
     {
         $routes = $this->uri[$this->getMethod()] ?? [];
 

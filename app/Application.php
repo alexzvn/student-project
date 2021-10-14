@@ -41,7 +41,7 @@ class Application
 
     public function handle()
     {
-        $this->route->build();
+        $this->route->prepare();
 
         if ($this->route->isAvailable() === false) {
             die('Page not found 404');
