@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Core\Http\Request;
 use Core\Http\Response;
 
-class HomeController 
+class HomeController
 {
     public function index(Request $request)
     {
