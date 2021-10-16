@@ -9,20 +9,18 @@ use Core\Service;
 
 abstract class RouterService extends Service
 {
-    protected $route;
+    protected Route $route;
 
     public function register(Route $route)
     {
-        $this->container->singleton(Route::class, $route);
-
-        $this->registerRoutes($route);
+        $this->registerRoutes($this->route = $route);
     }
 
     abstract function registerRoutes(Route $route);
 
-    public function boot(Route $route)
+    public function boot()
     {
-        $this->route = $route && Response::send($this->getDestination() ?? 'n/a');
+        Response::send($this->getDestination() ?? 'n/a');
     }
 
     protected function getDestination()
