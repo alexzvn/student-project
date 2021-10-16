@@ -69,7 +69,7 @@ class Session
         $this->put($key, $value);
     }
 
-    protected function __destruct()
+    public function __destruct()
     {
         $this->clearLastFlash();
         $this->moveFlash();
