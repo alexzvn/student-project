@@ -2,34 +2,64 @@
 
 namespace App;
 
-use App\Controllers\HomeController;
-use Auth;
 use Core\Container;
-use Core\Http\Response;
-use Core\Route;
-use Session;
+use Core\Contracts\ApplicationContract;
 
-class Application
+class Application implements ApplicationContract
 {
     protected Container $container;
 
+    /**
+     * All Services
+     *
+     * @var mixed
+     */
+    protected array $services = [
+        \Core\Services\SessionService::class,
+        \Core\Services\DatabaseService::class,
+        \App\Services\RouterService::class,
+    ];
+
     public function __construct() {
         $this->container = new Container;
-
-        $this->registerService();
+        $this->container->bind(Container::class, $this->container);
     }
 
-    public function registerService()
+    /**
+     * Prepare service
+     *
+     * @return void
+     */
+    protected function prepare()
     {
-        $this->container->singleton(Session::class);
-        $this->container->singleton(Auth::class);
-        $this->container->singleton(Route::class);
+        $this->services = array_map(function ($service) {
+            $service = $this->container->make($service);
+
+            if (method_exists($service, 'register')) {
+                $service->register(...$this->container->resolveMethod($service, 'register'));
+            }
+
+            return $service;
+        }, $this->services);
+    }
+
+    protected function boot()
+    {
+        foreach ($this->services as $service) {
+            if (method_exists($service, 'boot')) {
+                $service->boot(...$this->container->resolveMethod($service, 'boot'));
+            }
+        }
     }
 
     public function handle()
     {
-        $response = $this->container->make(Router::class)->getDestination();
+        $this->prepare();
+        $this->boot();
+    }
 
-        Response::send($response ?? '');
+    public function container()
+    {
+        return $this->container;
     }
 }
