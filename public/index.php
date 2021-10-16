@@ -2,4 +2,4 @@
 
 require_once '../bootstrap.php';
 
-(new \App\Application)->handle();
+$app->handle();
