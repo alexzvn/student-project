@@ -9,6 +9,6 @@ class SessionService extends Service
 {
     public function register()
     {
-        $this->container->singleton(Session::class, new Session);
+        $this->container->singleton(Session::class);
     }
 }
