@@ -17,6 +17,7 @@ class Application implements ApplicationContract
     protected array $services = [
         \Core\Services\SessionService::class,
         \Core\Services\DatabaseService::class,
+        \App\Services\AuthService::class,
         \App\Services\RouterService::class,
     ];
 
