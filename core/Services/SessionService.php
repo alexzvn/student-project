@@ -11,4 +11,9 @@ class SessionService extends Service
     {
         $this->container->singleton(Session::class);
     }
+
+    public function boot(Session $session)
+    {
+        $session->flash('inputs', $_POST);
+    }
 }
