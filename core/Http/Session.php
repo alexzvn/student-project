@@ -10,27 +10,28 @@ class Session
 
     function flash(string $key, $value)
     {
-        $_SESSION["flash.$key"] = $value;
+        $_SESSION["flash:$key"] = $value;
     }
 
     public function put(string $key, $value)
     {
-        $_SESSION["data.$key"] = $value;
+        $_SESSION["data:$key"] = $value;
     }
 
     public function get(string $key, $default = null)
     {
-        return $_SESSION["data.$key"] ?? $_SESSION["flash.$key"] ?? $this->old($key) ?? $default;
+        return array_dot("data:$key", $_SESSION, $default);
     }
 
     public function old(string $key, $default = null)
     {
-        return $_SESSION["old.$key"] ?? $default;
+        return array_dot("old:$key", $_SESSION)
+            ?? array_dot("flash:$key", $_SESSION, $default);
     }
 
     public function forget(string $key)
     {
-        unset($_SESSION["data.$key"]);
+        unset($_SESSION["data:$key"]);
     }
 
     public function destroy()
