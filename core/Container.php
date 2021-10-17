@@ -11,8 +11,6 @@ class Container
 
     protected static $singletonInstances = [];
 
-    protected static $singletonContainer = [];
-
     public static function bind($abstract, $class = null)
     {
         if ($class === null) {
@@ -24,8 +22,8 @@ class Container
 
     public static function singleton($abstract, $class = null)
     {
-        if ($class === null) {
-            $class = $abstract;
+        if (is_callable($class)) {
+            $class = $class();
         }
 
         self::$singletonInstances[$abstract] = $class;
@@ -34,11 +32,12 @@ class Container
     public static function make(string $abstract, $parameter = [])
     {
         if (isset(self::$singletonInstances[$abstract])) {
-            if (isset(self::$singletonContainer[$abstract])) {
-                return self::$singletonContainer[$abstract];
+
+            if (isset(self::$singletonInstances[$abstract])) {
+                return self::$singletonInstances[$abstract];
             }
 
-            return self::$singletonContainer[$abstract] = self::resolve(self::$singletonInstances[$abstract], $parameter);
+            return self::$singletonInstances[$abstract] = self::resolve(self::$singletonInstances[$abstract], $parameter);
         }
 
         if (! isset(self::$instances[$abstract])) {
