@@ -1,9 +1,9 @@
 <div class="navbar mb-2 shadow-lg fixed w-full bg-gray-50 z-10">
   <div class="container mx-auto">
-    <div class="flex px-2 mx-2">
-        <span class="text-lg font-bold text-primary hover:text-primary-focus">
+    <div class="flex-1 lg:flex-none px-2 mx-2">
+        <a href="/" class="text-lg font-bold text-yellow-400 hover:text-yellow-500 transition-colors duration-200">
             xShop
-        </span>
+        </a>
     </div> 
     <div class="flex-1 hidden px-2 mx-2 lg:flex">
         <div class="flex items-stretch">
@@ -18,11 +18,11 @@
 
     <div class="hidden lg:flex">
         <div class="flex items-stretch">
-            <a href="/login" class="btn btn-ghost btn-sm rounded-btn">
-                Đăng nhập
+            <a href="/login" class="btn btn-ghost btn-sm rounded-btn hover:bg-transparent hover:text-secondary">
+                Sign in
             </a>
-           <a href="/register" class="btn btn-outline btn-primary btn-sm rounded-btn">
-                Đăng ký
+           <a href="/register" class="btn btn-primary btn-sm rounded-btn">
+                Register
             </a>
         </div>
     </div> 
