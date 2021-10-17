@@ -58,15 +58,13 @@ class Container
             $type = $params[$i]->getType();
             $type = $type ? $type->getName() : null;
 
-
-
-            $params[$i] = $type ? static::resolve($type) : array_shift($parameters);
+            $params[$i] = $type ? static::make($type) : array_shift($parameters);
         }
 
         return $params;
     }
 
-    public static function resolve($concrete, $parameter = [])
+    protected static function resolve($concrete, $parameter = [])
     {
         if ($concrete instanceof Closure) {
             return $concrete(new self, $parameter);
