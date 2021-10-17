@@ -63,8 +63,16 @@ function config(string $key, $default = null)
         $config = require base_path('config.php');
     }
 
-    $value = $config;
+    return array_dot($key, $config, $default);
+}
 
+/**
+ * Access array by dot
+ *
+ * @return mixed
+ */
+function array_dot(string $key, array $value, $default = null)
+{
     foreach (explode('.', $key) as $key) {
         if (! isset($value[$key])) {
             return $default;
