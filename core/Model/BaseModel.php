@@ -18,6 +18,8 @@ abstract class BaseModel extends SimpleOrm
                 $this->set($key, $value);
             }
         }
+
+        return $this;
     }
 
     public function forceFill(array $attributes)
@@ -25,5 +27,7 @@ abstract class BaseModel extends SimpleOrm
         foreach ($attributes as $key => $value) {
             $this->set($key, $value);
         }
+
+        return $this;
     }
 }
