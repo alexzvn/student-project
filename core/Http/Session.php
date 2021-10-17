@@ -20,7 +20,7 @@ class Session
 
     public function get(string $key, $default = null)
     {
-        return $_SESSION["data.$key"] ?? $_SESSION["flash.$key"] ?? $default;
+        return $_SESSION["data.$key"] ?? $_SESSION["flash.$key"] ?? $this->old($key) ?? $default;
     }
 
     public function old(string $key, $default = null)
@@ -44,7 +44,7 @@ class Session
             if (preg_match('/^flash/', $key)) {
                 unset($_SESSION[$key]);
 
-                $key = preg_match('/^flash/', 'old', $key);
+                $key = preg_replace('/^flash/', 'old', $key);
                 $_SESSION[$key] = $value;
             }
         }
