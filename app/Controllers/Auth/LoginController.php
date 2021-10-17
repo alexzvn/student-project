@@ -6,6 +6,7 @@ use App\Models\User;
 use Core\Http\Auth;
 use Core\Http\Request;
 use Core\Http\Response;
+use Core\Support\Hash;
 
 class LoginController
 {
@@ -20,26 +21,40 @@ class LoginController
 
     public function login(Request $request, Auth $auth, Response $response)
     {
-        if ($auth->isLogged() || empty($request->email)) {
+        if ($auth->isLogged()) {
             return $response->redirect('/');
         }
 
-        $user = User::retrieveByField('email', $request->email, User::FETCH_ONE);
-
-        if ($errors = $this->validate($request, $user)) {
+        if ($errors = $this->validate($request)) {
             session()->flash('errors', $errors);
 
             return $response->redirect($request->referer());
         }
 
-        $auth->login($user);
+        $auth->login(
+            User::retrieveByField('email', $request->email, User::FETCH_ONE)
+        );
 
         return $response->redirect('/');
     }
 
-    public function validate(Request $request, User $user = null)
+    public function validate(Request $request)
     {
-        
+        $errors = ['login' => 'Credential incorrect, please try again'];
+
+        if (!$email = $request->email) {
+            return $errors;
+        }
+
+        if (! $user = User::retrieveByField('email', $email)) {
+            return $errors;
+        }
+
+        if (Hash::compare($request->password, $user->password)) {
+            return [];
+        }
+
+        return $errors;
     }
 }
 
