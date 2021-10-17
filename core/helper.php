@@ -2,6 +2,7 @@
 
 use Core\Container;
 use Core\Contracts\ApplicationContract;
+use Core\Http\Auth;
 use Core\Http\Session;
 use Core\Http\View;
 use Core\Support\Path;
@@ -36,11 +37,24 @@ function public_path(string $path = '')
     return Path::join(base_path('public'), $path);
 }
 
+/**
+ * Get value in callback
+ *
+ * @param callable $callback
+ * @return mixed
+ */
 function value(callable $callback)
 {
     return $callback();
 }
 
+/**
+ * Get config value
+ *
+ * @param string $key
+ * @param mixed $default
+ * @return mixed
+ */
 function config(string $key, $default = null)
 {
     static $config;
@@ -71,6 +85,13 @@ function view(string $view, array $variables = [])
     return $response;
 }
 
+/**
+ * View helper for include view
+ * separate path by dot
+ *
+ * @param string $view
+ * @return mixed
+ */
 function include_view(string $view)
 {
     include View::resolve($view);
@@ -111,6 +132,16 @@ function session($action = null)
     }
 
     return $session;
+}
+
+/**
+ * Get auth
+ *
+ * @return \Core\Http\Auth
+ */
+function auth()
+{
+    return app()->container()->make(Auth::class);
 }
 
 /**
