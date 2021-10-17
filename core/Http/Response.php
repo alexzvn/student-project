@@ -16,16 +16,22 @@ class Response
     public function redirect(string $to)
     {
         $this->header('Location', $to);
+
+        return $this;
     }
 
     public function header(string $key, string $value)
     {
         $this->headers[$key] = $value;
+
+        return $this;
     }
 
     public function view(string $view, array $variables = [])
     {
         $this->view = View::make($view, $variables);
+
+        return $this;
     }
 
     public function toClient()
