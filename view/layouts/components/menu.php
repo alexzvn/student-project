@@ -1,4 +1,4 @@
-<div class="navbar mb-2 shadow-lg fixed w-full bg-gray-50">
+<div class="navbar mb-2 shadow-lg fixed w-full bg-gray-50 z-10">
   <div class="container mx-auto">
     <div class="flex px-2 mx-2">
         <span class="text-lg font-bold text-primary hover:text-primary-focus">
@@ -18,10 +18,10 @@
 
     <div class="hidden lg:flex">
         <div class="flex items-stretch">
-            <a class="btn btn-ghost btn-sm rounded-btn">
+            <a href="/login" class="btn btn-ghost btn-sm rounded-btn">
                 Đăng nhập
             </a>
-           <a class="btn btn-outline btn-primary btn-sm rounded-btn">
+           <a href="/register" class="btn btn-outline btn-primary btn-sm rounded-btn">
                 Đăng ký
             </a>
         </div>
