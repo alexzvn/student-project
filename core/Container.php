@@ -32,12 +32,11 @@ class Container
     public static function make(string $abstract, $parameter = [])
     {
         if (isset(self::$singletonInstances[$abstract])) {
+            return self::$singletonInstances[$abstract];
+        }
 
-            if (isset(self::$singletonInstances[$abstract])) {
-                return self::$singletonInstances[$abstract];
-            }
-
-            return self::$singletonInstances[$abstract] = self::resolve(self::$singletonInstances[$abstract], $parameter);
+        if (array_key_exists($abstract, self::$singletonInstances)) {
+            return self::$singletonInstances[$abstract] = self::resolve($abstract, $parameter);
         }
 
         if (! isset(self::$instances[$abstract])) {
