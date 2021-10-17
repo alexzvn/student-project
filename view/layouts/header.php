@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="bumblebee">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,3 +14,4 @@
     <div class="rounded-lg shadow bg-base-200 drawer drawer-end">
     <input id="drawer" type="checkbox" class="drawer-toggle"> 
     <div class="drawer-content">
+        <?php include_view('layouts.components.menu') ?>
