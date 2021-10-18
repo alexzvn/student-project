@@ -8,6 +8,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.4/dist/full.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/custom.css">
 </head>
 
 <body>
