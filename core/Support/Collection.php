@@ -2,9 +2,11 @@
 
 namespace Core\Support;
 
-class Collection implements \ArrayAccess
+class Collection implements \ArrayAccess, \Iterator
 {
     protected $collection;
+
+    protected $index = 0;
 
     public function __construct(array $collection = []) {
         $this->collection = $collection;
@@ -34,7 +36,7 @@ class Collection implements \ArrayAccess
 
     public function offsetExists($offset)
     {
-        return isset($this->array[$offset]);
+        return array_key_exists($offset, $this->collection);
     }
 
     public function offsetGet($offset)
@@ -50,6 +52,37 @@ class Collection implements \ArrayAccess
     public function offsetUnset($offset)
     {
         unset($this->array[$offset]);
+    }
+
+    public function current()
+    {
+        return $this->collection[$this->index];
+    }
+
+    public function next()
+    {
+        $this->index++;
+    }
+
+    public function key()
+    {
+        return $this->index;
+    }
+
+    public function valid()
+    {
+        return isset($this->collection[$this->key()]);
+    }
+
+    public function rewind()
+    {
+        $this->index = 0;
+    }
+
+    public function reverse()
+    {
+        $this->collection = array_reverse($this->collection);
+        $this->rewind();
     }
 
     public function toArray()
