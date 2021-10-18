@@ -27,12 +27,11 @@ class RegisterController
             return $response->redirect($request->referer());
         }
 
-        $user = new User($request->only([
-            'name', 'email', 'address'
-        ]));
+        $user = new User();
 
-        $user->forceFill([
-            'password' => Hash::make($request->password)
+        $user->fill($request->all())->forceFill([
+            'password' => Hash::make($request->password),
+            'is_admin' => 0
         ])->save();
 
         $auth->login($user);
@@ -60,7 +59,7 @@ class RegisterController
             $errors['password'] = 'Password at least 8 character';
         }
 
-        if (empty($errors['email']) && !User::retrieveByField("email", $request->email)) {
+        if (empty($errors['email']) && User::retrieveByField("email", $request->email)) {
             $errors['email'] = 'Email already registered';
         }
 
