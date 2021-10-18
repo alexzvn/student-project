@@ -13,13 +13,15 @@ abstract class RouterService extends Service
 
     public function register(Route $route)
     {
-        $this->registerRoutes($this->route = $route);
+        $this->route = $route;
     }
 
     abstract function registerRoutes(Route $route);
 
     public function boot()
     {
+        $this->registerRoutes($this->route);
+
         Response::send($this->getDestination() ?? 'n/a');
     }
 
