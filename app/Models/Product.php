@@ -6,12 +6,12 @@ use Core\Model\BaseModel;
 
 class Product extends BaseModel
 {
-    protected $table = 'products';
+    protected static $table = 'products';
 
     protected $fillable = [
         'name',
-        'avatar',
         'price',
-        'description',
+        'type',
+        'brand',
     ];
 }
