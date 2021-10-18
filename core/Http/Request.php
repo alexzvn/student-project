@@ -16,7 +16,7 @@ class Request
 
     public function file(string $key)
     {
-        return is_array($_FILES[$key])
+        return isset($_FILES[$key])
             ? new FileUpload($_FILES[$key])
             : null;
     }
