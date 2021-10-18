@@ -7,16 +7,44 @@
     </div> 
     <div class="flex-1 hidden px-2 mx-2 lg:flex">
         <div class="flex items-stretch">
-            <a class="btn btn-ghost btn-sm rounded-btn">
-                Apple
-            </a>
-        <a class="btn btn-ghost btn-sm rounded-btn">
-                Samsung
-            </a>
+            <?php foreach (config('categories') as $category => $categories): ?>
+            <div class="dropdown dropdown-hover">
+                <div tabindex="0" class="btn btn-ghost btn-sm rounded-btn"><?= $category ?></div>
+                <?php if (is_array($categories)): ?>
+                    <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+                        <?php foreach ($categories as $category): ?>
+                            <li><a><?= ucfirst($category) ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 
     <div class="hidden lg:flex">
+        <?php if ($user = auth()->user()): ?>
+        <div class="dropdown dropdown-hover dropdown-end">
+            <button tabindex="0" class="btn btn-ghost btn-sm rounded-btn">
+                Hi, <span class="underline ml-1"><?= $user->name?></span>
+            </button>
+            <ul class="shadow-md menu dropdown-content bg-base-100 rounded-md w-52">
+                <li>
+                    <a href="/saved">Account</a>
+                </li>
+                <li>
+                    <a href="#">Orders</a>
+                </li>
+                <?php if ($user->is_admin): ?>
+                    <li><a href="#">Manage products</a></li>
+                    <li><a href="#">Manage orders</a></li>
+                <?php endif; ?>
+                <li class="text-red-500">
+                    <a href="/logout">Sign Out</a>
+                </li>
+            </ul>
+        </div>
+        <?php else: ?>
         <div class="flex items-stretch">
             <a href="/login" class="btn btn-ghost btn-sm rounded-btn hover:bg-transparent hover:text-secondary">
                 Sign in
@@ -25,7 +53,8 @@
                 Register
             </a>
         </div>
-    </div> 
+        <?php endif; ?>
+    </div>
 
     <div class="flex-none lg:hidden">
         <button class="btn btn-square btn-ghost">

@@ -20,6 +20,12 @@ return [
         /**
          * Database name
          */
-        'name' => ''
-    ]
+        'name' => 'xshop'
+    ],
+
+    'categories' => [
+        'phone' => ['apple', 'samsung', 'sony', 'xiaomi', 'vinsmart'],
+        'laptop' => ['macbook', 'microsoft', 'acer', 'asus'],
+        'tablet' => ['ipad', 'samsung'],
+    ],
 ];
