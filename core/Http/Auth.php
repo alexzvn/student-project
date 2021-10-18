@@ -30,12 +30,12 @@ class Auth
 
     public function onLogin(callable $callback)
     {
-        $this->events['login'] = $callback;
+        $this->events['login'][] = $callback;
     }
 
     public function onLogout(callable $callback)
     {
-        $this->events['logout'] = $callback;
+        $this->events['logout'][] = $callback;
     }
 
     protected function dispatch(string $event, ...$args)
