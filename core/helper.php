@@ -153,6 +153,22 @@ function auth()
 }
 
 /**
+ * Get error in session flash
+ *
+ * @param string $key
+ * @return mixed|false
+ */
+function error(string $key)
+{
+    return session()->old("errors.$key", false);
+}
+
+function input(string $key, $default = null)
+{
+    return session()->old("inputs.$key", $default);
+}
+
+/**
  * Get old parameter in session
  *
  * @param string $key

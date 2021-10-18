@@ -42,6 +42,28 @@ class RegisterController
 
     public function validate(Request $request)
     {
-        
+        $errors = [];
+
+        if (strlen($request->name) < 2) {
+            $errors['name'] = 'Name too short';
+        }
+
+        if (! filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = 'Invalid email address';
+        }
+
+        if ($request->password !== $request->confirmed_password) {
+            $errors['password'] = 'Password confirmed mismatch';
+        }
+
+        if (strlen($request->password) < 8) {
+            $errors['password'] = 'Password at least 8 character';
+        }
+
+        if (empty($errors['email']) && !User::retrieveByField("email", $request->email)) {
+            $errors['email'] = 'Email already registered';
+        }
+
+        return $errors;
     }
 }
