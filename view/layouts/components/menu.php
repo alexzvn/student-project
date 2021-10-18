@@ -30,13 +30,13 @@
             </button>
             <ul class="shadow-md menu dropdown-content bg-base-100 rounded-md w-52">
                 <li>
-                    <a href="/saved">Account</a>
+                    <a href="#">Account</a>
                 </li>
                 <li>
                     <a href="#">Orders</a>
                 </li>
                 <?php if ($user->is_admin): ?>
-                    <li><a href="#">Manage products</a></li>
+                    <li><a href="/manager/products">Manage products</a></li>
                     <li><a href="#">Manage orders</a></li>
                 <?php endif; ?>
                 <li class="text-red-500">
