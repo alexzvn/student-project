@@ -1,6 +1,8 @@
 <?php
 
-class Collection implements ArrayAccess
+namespace Core\Support;
+
+class Collection implements \ArrayAccess
 {
     protected $collection;
 
