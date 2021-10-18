@@ -46,7 +46,7 @@ class LoginController
             return $errors;
         }
 
-        if (! $user = User::retrieveByField('email', $email)) {
+        if (! $user = User::retrieveByField('email', $email, User::FETCH_ONE)) {
             return $errors;
         }
 
