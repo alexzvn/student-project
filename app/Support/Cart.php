@@ -36,6 +36,16 @@ class Cart
         unset($this->cart[$id]);
     }
 
+    public function isEmpty()
+    {
+        return empty($this->cart);
+    }
+
+    public function count()
+    {
+        return count($this->cart);
+    }
+
     public function get()
     {
         return $this->cart;
