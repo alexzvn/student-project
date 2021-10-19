@@ -43,7 +43,7 @@ class RouterService extends CoreRouterService
         $route->post('/manager/products/store', [ProductController::class, 'store']);
         $route->get('/manager/products/{id}', [ProductController::class, 'show']);
         $route->post('/manager/products/{id}/update', [ProductController::class, 'update']);
-        $route->post('/manager/products/{id}/delete', [ProductController::class, 'delete']);
+        $route->get('/manager/products/{id}/delete', [ProductController::class, 'delete']);
 
         $route->get('/manager/orders', [OrderController::class, 'index']);
         $route->get('/manager/orders/{id}', [OrderController::class, 'show']);

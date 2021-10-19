@@ -79,9 +79,14 @@ class ProductController
         return $response->redirect($request->referer());
     }
 
-    public function delete($id)
+    public function delete($id, Response $response)
     {
-        
+        if ($product = Product::find($id)) {
+            $product->delete();
+            session()->flash('alert:success', "Deleted product $product->name");
+        }
+
+        return $response->redirect('/manager/products');
     }
 
     public function publishAvatar(FileUpload $upload)
