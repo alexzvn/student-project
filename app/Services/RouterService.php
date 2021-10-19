@@ -18,6 +18,7 @@ class RouterService extends CoreRouterService
     public function registerRoutes(Route $route)
     {
         $route->get('/', [HomeController::class, 'index']);
+        $route->get('/search', [HomeController::class, 'search']);
 
         $route->get('/login', [LoginController::class, 'index']);
         $route->post('/login', [LoginController::class, 'login']);

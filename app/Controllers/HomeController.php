@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\Product;
 use Core\Http\Request;
-use Core\Http\Response;
 
 class HomeController
 {
@@ -13,5 +12,16 @@ class HomeController
         return view('index', [
             'products' => Product::all()
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        $keywords = Product::fuzzyText($request->query);
+
+        $products = Product::sql(
+            "SELECT * FROM :table WHERE MATCH(name,kind,brand) AGAINST($keywords IN BOOLEAN MODE)", Product::FETCH_MANY
+        );
+
+        return view('search', compact('products'));
     }
 }
