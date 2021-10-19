@@ -1,6 +1,14 @@
 <?php
 
 return [
+    'services' => [
+        \Core\Services\SessionService::class,
+        \Core\Services\DatabaseService::class,
+        \App\Services\AuthService::class,
+        \App\Services\CartService::class,
+        \App\Services\RouterService::class,
+    ],
+
     'database' => [
         /**
          * Database host address

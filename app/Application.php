@@ -14,17 +14,12 @@ class Application implements ApplicationContract
      *
      * @var mixed
      */
-    protected array $services = [
-        \Core\Services\SessionService::class,
-        \Core\Services\DatabaseService::class,
-        \App\Services\AuthService::class,
-        \App\Services\CartService::class,
-        \App\Services\RouterService::class,
-    ];
+    protected array $services;
 
     public function __construct() {
         $this->container = new Container;
         $this->container->bind(Container::class, $this->container);
+        $this->services  = config('services');
     }
 
     /**
