@@ -11,7 +11,7 @@ class Product extends BaseModel
     protected $fillable = [
         'name',
         'price',
-        'type',
+        'kind',
         'brand',
     ];
 }
