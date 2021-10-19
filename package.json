@@ -1,0 +1,30 @@
+{
+  "name": "student-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i style.css -o ./public/style.css",
+    "watch": "yarn build -w",
+    "build:prod": "NODE_ENV=production yarn build --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexzvn/student-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexzvn/student-project/issues"
+  },
+  "homepage": "https://github.com/alexzvn/student-project#readme",
+  "dependencies": {
+    "daisyui": "^1.14.5",
+    "tailwindcss": "^2.2.17"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.3.7",
+    "postcss": "^8.3.9"
+  }
+}
