@@ -10,7 +10,7 @@ class Route
 
     public function register(string $uri, string $method, $handler)
     {
-        $uri = preg_replace('/{[a-zA-Z0-9_-]+}/', '([a-zA-Z0-9_-]+)', $uri);
+        $uri = preg_replace('/{[a-zA-Z0-9_-]+}/', '([^/]*)', $uri);
         $uri = str_replace('/', '\\/', $uri);
 
         $this->uri[strtoupper($method)]["/^$uri$/"] = $handler;
