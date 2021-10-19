@@ -100,8 +100,10 @@ function view(string $view, array $variables = [])
  * @param string $view
  * @return mixed
  */
-function include_view(string $view)
+function include_view(string $view, array $variables = [])
 {
+    extract($variables);
+
     include View::resolve($view);
 }
 
