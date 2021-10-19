@@ -3,13 +3,11 @@
 namespace App\Services;
 
 use App\Controllers\Auth\LoginController;
-use App\Controllers\Auth\LogoutController;
 use App\Controllers\Auth\RegisterController;
 use App\Controllers\HomeController;
 use App\Controllers\Manager\OrderController;
 use App\Controllers\Manager\ProductController;
 use App\Controllers\UserController;
-use App\Models\User;
 use Core\Http\Auth;
 use Core\Route;
 use Core\Services\RouterService as CoreRouterService;
@@ -24,7 +22,6 @@ class RouterService extends CoreRouterService
         $route->post('/login', [LoginController::class, 'login']);
         $route->get('/register', [RegisterController::class, 'index']);
         $route->post('/register', [RegisterController::class, 'register']);
-        $route->get('/logout', [LogoutController::class, 'logout']);
 
         $route->get('/cart', [HomeController::class, 'cart']);
         $route->get('/checkout', [HomeController::class, 'checkout']);
@@ -35,6 +32,7 @@ class RouterService extends CoreRouterService
     protected function registerPrivateRoutes(Route $route, Auth $auth)
     {
         if ($auth->isLogged() === false) return;
+        $route->get('/logout', [UserController::class, 'logout']);
         $route->get('/me', [UserController::class, 'index']);
         $route->get('/me/orders', [UserController::class, 'order']);
 
