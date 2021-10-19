@@ -27,10 +27,18 @@
         <div class="dropdown dropdown-hover dropdown-end">
             <button tabindex="0" class="btn btn-ghost btn-sm rounded-btn">
                 Hi, <span class="underline ml-1"><?= $user->name?></span>
+                <?php if (! cart()->isEmpty()): ?>
+                    <span class="badge ml-2" style="background-color: #373737; color: #f5f5f5;"><?= cart()->count() ?></span>
+                <?php endif; ?>
             </button>
             <ul class="shadow-md menu dropdown-content bg-base-100 rounded-md w-52">
                 <li>
-                    <a href="#">Account</a>
+                    <a href="/cart" class="flex justify-between">
+                        <span>Cart</span>
+                        <?php if (! cart()->isEmpty()): ?>
+                            <span class='badge ml-2'><?= cart()->count() ?></span>
+                        <?php endif; ?>
+                    </a>
                 </li>
                 <li>
                     <a href="#">Orders</a>
