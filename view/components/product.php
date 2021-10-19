@@ -18,7 +18,7 @@
                 </svg>
             </a>
 
-            <a href="/products/<?= e($product->id) ?>"class="btn btn-sm btn-outline">See more</a>
+            <a href="/products/<?= e($product->id) ?>" class="btn btn-sm btn-outline">See more</a>
         </div>
     </div>
 </div>
