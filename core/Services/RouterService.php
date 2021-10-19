@@ -45,8 +45,7 @@ abstract class RouterService extends Service
         $controller = $this->container->make($controller);
 
         return $controller->$method(
-            ...$this->route->getParams(),
-            ...Container::resolveMethod($controller, $method)
+            ...Container::resolveMethod($controller, $method, $this->route->getParams())
         );
     }
 
