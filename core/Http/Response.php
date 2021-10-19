@@ -6,6 +6,8 @@ class Response
 {
     protected array $headers = [];
 
+    protected int $status = 200;
+
     /**
      * View object
      *
@@ -34,8 +36,23 @@ class Response
         return $this;
     }
 
-    public function toClient()
+    /**
+     * Http status code
+     *
+     * @param integer $status
+     * @return static
+     */
+    public function code(int $status)
     {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    protected function toClient()
+    {
+        http_response_code($this->status);
+
         foreach ($this->headers as $key => $value) {
             header("$key: $value");
         }

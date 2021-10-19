@@ -52,6 +52,6 @@ class RouterService extends CoreRouterService
 
     public function getDestination()
     {
-        return parent::getDestination() ?? view('errors.404');
+        return parent::getDestination() ?? view('errors.404')->code(404);
     }
 }
