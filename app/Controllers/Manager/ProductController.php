@@ -24,7 +24,7 @@ class ProductController
 
     public function store(Request $request, Response $response)
     {
-        if ($error = $this->validate($request)) {
+        if ($error = $this->validate($request) ?? $this->validateAvatar($request)) {
             session()->flash('alert:error', $error);
 
             return $response->redirect($request->referer());
@@ -50,9 +50,33 @@ class ProductController
         ]);
     }
 
-    public function update($id)
+    public function update($id, Request $request, Response $response)
     {
-        
+        if (!$product = Product::find((int) $id)) {
+            return;
+        }
+
+        $error = $this->validate($request);
+
+        if ($request->file('avatar')) {
+            $this->validateAvatar($request);
+        }
+
+        if ($error) {
+            session()->flash('alert:error', $error);
+            return $response->redirect($request->referer());
+        }
+
+        $product->fill($request->all());
+
+        if ($avatar = $request->file('avatar')) {
+            $product->forceFill(['avatar' => $this->publishAvatar($avatar)]);
+        }
+
+        $product->save();
+
+        session()->flash('alert:success', 'Saved change for current product.');
+        return $response->redirect($request->referer());
     }
 
     public function delete($id)
@@ -79,6 +103,11 @@ class ProductController
             return 'Price is invalid';
         }
 
+        return null;
+    }
+
+    public function validateAvatar(Request $request)
+    {
         if (!$avatar = $request->file('avatar')) {
             return 'Avatar product is required';
         }
