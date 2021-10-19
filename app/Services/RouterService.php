@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Controllers\Auth\LoginController;
 use App\Controllers\Auth\RegisterController;
+use App\Controllers\CartController;
 use App\Controllers\HomeController;
 use App\Controllers\Manager\OrderController;
 use App\Controllers\Manager\ProductController;
@@ -25,8 +26,10 @@ class RouterService extends CoreRouterService
         $route->get('/register', [RegisterController::class, 'index']);
         $route->post('/register', [RegisterController::class, 'register']);
 
-        $route->get('/cart', [HomeController::class, 'cart']);
-        $route->get('/checkout', [HomeController::class, 'checkout']);
+        $route->get('/cart', [CartController::class, 'index']);
+        $route->get('/cart/{product}/remove', [CartController::class, 'remove']);
+        $route->get('/products/{product}/add', [CartController::class, 'add']);
+        $route->post('/cart/checkout', [CartController::class, 'checkout']);
 
         $this->registerPrivateRoutes($route, auth());
     }
