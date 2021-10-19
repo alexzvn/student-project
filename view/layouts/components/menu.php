@@ -54,6 +54,15 @@
         </div>
         <?php else: ?>
         <div class="flex items-stretch">
+            <?php if (! cart()->isEmpty()): ?>
+                <a href="/cart" class="btn btn-sm btn-circle btn-primary relative mr-3">
+                <svg svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                    <span class="badge badge-sm ml-2 absolute top-0 -right-3" style="background-color: #373737; color: #f5f5f5;"><?= cart()->count() ?></span>
+                </a>
+            <?php endif; ?>
+
             <a href="/login" class="btn btn-ghost btn-sm rounded-btn hover:bg-transparent hover:text-secondary">
                 Sign in
             </a>
