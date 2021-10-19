@@ -16,9 +16,15 @@ class Request
 
     public function file(string $key)
     {
-        return isset($_FILES[$key])
-            ? new FileUpload($_FILES[$key])
-            : null;
+        if (! $file = $_FILES[$key] ?? false) {
+            return null;
+        }
+
+        if ($file['error'] === UPLOAD_ERR_NO_FILE) {
+            return null;
+        }
+
+        return new FileUpload($file);
     }
 
     public function only(array $keys)
