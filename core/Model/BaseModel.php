@@ -8,7 +8,11 @@ abstract class BaseModel extends SimpleOrm
 
     public static function find($id)
     {
-        return static::retrieveByPK($id);
+        try {
+            return static::retrieveByPK($id);
+        } catch (\Throwable $th) {
+            return null;
+        }
     }
 
     public function fill(array $attributes)
