@@ -9,7 +9,7 @@
             <span class="text-gray-400 font-normal"><?= $product->kind ? e(ucfirst($product->kind)) : '' ?></span>
         </p>
 
-        <a href="/products/<?= e($product->id) ?>" class="font-medium text-lg mt-1"><?= e("Samsung Galaxy Z Flip3 5G 256GB") ?></a>
+        <a href="/products/<?= e($product->id) ?>" class="font-medium text-lg mt-1"><?= e($product->name) ?></a>
 
         <div class="flex justify-between mt-5">
             <a href="/products/<?= e($product->id) ?>/cart" class="btn btn-sm btn-primary btn-circle">
