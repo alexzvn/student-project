@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Support\Cart;
 use Core\Http\Auth;
@@ -55,5 +56,26 @@ class CartController
 
             return back();
         }
+
+        $order = new Order();
+
+        $order->forceFill([
+            'address' => $auth->user()->address,
+            'user_id' => $auth->user()->id
+        ])->save();
+
+        $sql = [];
+        foreach ($cart->items() as $item) {
+            [$product, $amount] = $item;
+
+            $sql[] = "($product->id, $order->id, $amount)";
+        }
+
+        Order::sql("INSERT INTO order_items (product_id, order_id, amount) VALUE " . implode(',', $sql), Order::FETCH_NONE);
+
+        $cart->clear();
+
+        session()->flash('alert:success', 'Oder placed');
+        return back();
     }
 }
