@@ -9,6 +9,7 @@ use App\Controllers\Manager\OrderController;
 use App\Controllers\Manager\ProductController;
 use App\Controllers\UserController;
 use Core\Http\Auth;
+use Core\Http\Response;
 use Core\Route;
 use Core\Services\RouterService as CoreRouterService;
 
@@ -47,5 +48,10 @@ class RouterService extends CoreRouterService
         $route->get('/manager/orders', [OrderController::class, 'index']);
         $route->get('/manager/orders/{id}', [OrderController::class, 'show']);
         $route->post('/manager/orders/{id}/delete', [OrderController::class, 'delete']);
+    }
+
+    public function getDestination()
+    {
+        return parent::getDestination() ?? view('errors.404');
     }
 }
