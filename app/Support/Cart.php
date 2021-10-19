@@ -2,7 +2,9 @@
 
 namespace App\Support;
 
+use App\Models\Product;
 use Core\Http\Session;
+use Core\Support\Collection;
 
 class Cart
 {
@@ -12,6 +14,8 @@ class Cart
 
     public function __construct(Session $session) {
         $this->session = $session;
+
+        $this->load();
     }
 
     protected function load()
@@ -31,9 +35,19 @@ class Cart
         $this->cart[$id]++;
     }
 
+    public function set($id, int $count)
+    {
+        $this->cart[$id] = $count;
+    }
+
     public function remove($id)
     {
         unset($this->cart[$id]);
+    }
+
+    public function has($id)
+    {
+        return isset($this->cart[$id]);
     }
 
     public function isEmpty()
@@ -43,12 +57,31 @@ class Cart
 
     public function count()
     {
-        return count($this->cart);
+        return array_sum(array_values($this->cart));
     }
 
     public function get()
     {
         return $this->cart;
+    }
+
+    public function items()
+    {
+        if (empty($this->cart)) {
+            return [];
+        }
+
+        $ids = implode(',', array_keys($this->cart));
+
+        $products = new Collection(
+            Product::sql("SELECT * FROM :table WHERE id IN ($ids)", Product::FETCH_MANY)
+        );
+
+        foreach ($products as $product) {
+            $items[] = [$product, $this->cart["$product->id"]];
+        }
+
+        return $items ?? [];
     }
 
     public function clear()
