@@ -3,6 +3,8 @@
 use Core\Container;
 use Core\Contracts\ApplicationContract;
 use Core\Http\Auth;
+use Core\Http\Request;
+use Core\Http\Response;
 use Core\Http\Session;
 use Core\Http\View;
 use Core\Support\Path;
@@ -115,6 +117,46 @@ function include_view(string $view, array $variables = [])
 function app()
 {
     return Container::make(ApplicationContract::class);
+}
+
+/**
+ * Undocumented function
+ *
+ * @return Core\Http\Request
+ */
+function request()
+{
+    return app()->container()->make(Request::class);
+}
+
+/**
+ * Undocumented function
+ *
+ * @return \Core\Http\Response
+ */
+function response()
+{
+    return app()->container()->make(Response::class);
+}
+
+/**
+ * Undocumented function
+ *
+ * @return \Core\Http\Response
+ */
+function redirect(string $to)
+{
+    return response()->redirect($to);
+}
+
+/**
+ * Undocumented function
+ *
+ * @return \Core\Http\Response
+ */
+function back()
+{
+    return redirect(request()->referer());
 }
 
 /**
