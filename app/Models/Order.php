@@ -18,4 +18,9 @@ class Order extends BaseModel
             RIGHT JOIN order_items ON order_items.product_id = products.id
             WHERE order_id = $this->id");
     }
+
+    public function user()
+    {
+        return User::find($this->user_id);
+    }
 }
