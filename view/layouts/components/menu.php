@@ -42,7 +42,7 @@
                 </li>
                 <?php if ($user->is_admin): ?>
                     <li><a href="/manager/products">Manage products</a></li>
-                    <li><a href="#">Manage orders</a></li>
+                    <li><a href="/manager/orders">Manage orders</a></li>
                 <?php endif; ?>
                 <li class="text-red-500">
                     <a href="/logout">Sign Out</a>
