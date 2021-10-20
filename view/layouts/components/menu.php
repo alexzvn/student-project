@@ -9,11 +9,11 @@
         <div class="flex items-stretch">
             <?php foreach (config('categories') as $category => $categories): ?>
             <div class="dropdown dropdown-hover">
-                <div tabindex="0" class="btn btn-ghost btn-sm rounded-btn"><?= $category ?></div>
+                <a href="/search?query=<?= $category ?>" tabindex="0" class="btn btn-ghost btn-sm rounded-btn"><?= $category ?></a>
                 <?php if (is_array($categories)): ?>
                     <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
                         <?php foreach ($categories as $category): ?>
-                            <li><a><?= ucfirst($category) ?></a></li>
+                            <li><a href="/search?query=<?= $category ?>"><?= ucfirst($category) ?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 <?php endif; ?>
