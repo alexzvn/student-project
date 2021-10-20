@@ -25,7 +25,16 @@
                         <th><?= $i++ ?></th>
                         <td><?= e($product->name) ?></td>
                         <td>$<?= e(number_format($product->price, 2)) ?></td>
-                        <td><input name="item[<?= $product->id ?>]" type="number" min="1" max="99" step="1" placeholder="username" class="input input-sm" style="max-width: 5rem;" value="<?= $amount ?>"></td>
+                        <td>
+                            <input
+                                name="item[<?= $product->id ?>]"
+                                type="number" min="1" max="99" step="1"
+                                class="input input-sm counter"
+                                style="max-width: 5rem;"
+                                data-price="<?= $product->price ?>"
+                                value="<?= $amount ?>"
+                            />
+                        </td>
                         <td>
                             <a href="<?= "/cart/$product->id/remove" ?>" class="btn btn-circle btn-outline btn-error btn-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,12 +47,45 @@
                 </tbody>
             </table>
 
+            <p class="text-lg font-semibold mt-3">
+                Total price: <span class="text-red-500 font-light" id="price"></span>
+            </p>
+
             <div class="flex justify-between mt-5">
-                <button class="btn btn-success btn-outline">◀︎ Continue Shopping</button>
+                <a href="/" class="btn btn-success btn-outline">◀︎ Continue Shopping</a>
                 <button class="btn btn-primary">Checkout & Order</button>
             </div>
         </form>
     </div>
 </div>
+
+<?php
+
+?>
+
+<script>
+const counters = document.querySelectorAll('input.counter')
+
+const renderPrice = () => {
+    let price = 0
+
+    counters.forEach(el => {
+        price += Number.parseFloat(el.getAttribute('data-price')) * Number.parseInt(el.value)
+    })
+
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    })
+
+    document.querySelector('#price').innerHTML = formatter.format(price)
+}
+
+counters.forEach(el => {
+    el.addEventListener('change', renderPrice)
+})
+
+renderPrice();
+</script>
 
 <?php include_view('layouts.footer'); ?>
