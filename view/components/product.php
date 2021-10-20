@@ -9,8 +9,8 @@
             <span class="text-gray-400 font-normal"><?= $product->kind ? e(ucfirst($product->kind)) : '' ?></span>
         </p>
 
-        <a href="/products/<?= e($product->id) ?>" class="font-medium text-lg mt-1"><?= e($product->name) ?></a>
+        <p class="font-medium text-lg mt-1"><?= e($product->name) ?></p>
 
-        <a href="/products/<?= e($product->id) ?>/add" class="btn btn-sm btn-success btn-outline mt-5">Buy now</a>
+        <a href="/products/<?= e($product->id) ?>/add" class="btn btn-sm btn-success btn-outline mt-5">Add to cart</a>
     </div>
 </div>
