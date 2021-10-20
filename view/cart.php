@@ -59,10 +59,6 @@
     </div>
 </div>
 
-<?php
-
-?>
-
 <script>
 const counters = document.querySelectorAll('input.counter')
 
