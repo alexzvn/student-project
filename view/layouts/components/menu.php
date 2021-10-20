@@ -40,9 +40,6 @@
                         <?php endif; ?>
                     </a>
                 </li>
-                <li>
-                    <a href="#">Orders</a>
-                </li>
                 <?php if ($user->is_admin): ?>
                     <li><a href="/manager/products">Manage products</a></li>
                     <li><a href="#">Manage orders</a></li>
