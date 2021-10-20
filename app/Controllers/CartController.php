@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Support\Cart;
 use Core\Http\Auth;
 use Core\Http\Request;
+use Core\Http\Session;
 
 class CartController
 {
@@ -37,6 +38,17 @@ class CartController
         }
 
         return back();
+    }
+
+    public function complete(Session $session)
+    {
+        if (!$order = $session->old('order:placed')) {
+            return redirect('/');
+        }
+
+        return view('thankyou', [
+            'order' => Order::find($order)
+        ]);
     }
 
     public function checkout(Request $request, Cart $cart, Auth $auth)
@@ -75,7 +87,8 @@ class CartController
 
         $cart->clear();
 
-        session()->flash('alert:success', 'Oder placed');
-        return back();
+        session()->flash('order:placed', $order->id);
+
+        return redirect('/cart/complete');
     }
 }

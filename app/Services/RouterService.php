@@ -30,6 +30,7 @@ class RouterService extends CoreRouterService
         $route->get('/cart/{product}/remove', [CartController::class, 'remove']);
         $route->get('/products/{product}/add', [CartController::class, 'add']);
         $route->post('/cart/checkout', [CartController::class, 'checkout']);
+        $route->get('/cart/complete', [CartController::class, 'complete']);
 
         $this->registerPrivateRoutes($route, auth());
     }
