@@ -31,9 +31,7 @@ class LoginController
             return $response->redirect($request->referer());
         }
 
-        $auth->login(
-            User::retrieveByField('email', $request->email, User::FETCH_ONE)
-        );
+        $auth->login(User::findBy('email', $request->email));
 
         return $response->redirect('/');
     }
@@ -46,7 +44,7 @@ class LoginController
             return $errors;
         }
 
-        if (! $user = User::retrieveByField('email', $email, User::FETCH_ONE)) {
+        if (! $user = User::findBy('email', $email)) {
             return $errors;
         }
 

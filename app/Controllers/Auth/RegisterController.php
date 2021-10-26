@@ -59,7 +59,7 @@ class RegisterController
             $errors['password'] = 'Password at least 8 character';
         }
 
-        if (empty($errors['email']) && User::retrieveByField("email", $request->email)) {
+        if (empty($errors['email']) && User::findBy("email", $request->email)) {
             $errors['email'] = 'Email already registered';
         }
 

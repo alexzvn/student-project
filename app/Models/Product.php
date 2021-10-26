@@ -6,7 +6,7 @@ use Core\Model\BaseModel;
 
 class Product extends BaseModel
 {
-    protected static $table = 'products';
+    protected static string $table = 'products';
 
     protected $fillable = [
         'name',

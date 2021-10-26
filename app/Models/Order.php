@@ -6,7 +6,7 @@ use Core\Model\BaseModel;
 
 class Order extends BaseModel
 {
-    protected static $table = 'orders';
+    protected static string $table = 'orders';
 
     protected $fillable = [
         'address'

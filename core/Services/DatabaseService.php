@@ -14,8 +14,9 @@ class DatabaseService extends Service
             config('database.host'),
             config('database.user'),
             config('database.pass'),
+            config('database.name')
         );
 
-        BaseModel::useConnection($connection, config('database.name'));
+        BaseModel::useConnection($connection);
     }
 }

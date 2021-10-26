@@ -6,7 +6,7 @@ use Core\Model\BaseModel;
 
 class User extends BaseModel
 {
-    protected static $table = 'users';
+    protected static string $table = 'users';
 
     protected $fillable = [
         'name',
