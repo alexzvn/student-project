@@ -1,6 +1,6 @@
 <?php include_view('layouts.header'); ?>
 
-<div class="container mx-auto min-h-screen px-20">
+<div class="container mx-auto min-h-screen py-20">
     <div class="card shadow-md w-full max-w-2xl mx-auto mt-10">
         <form class="card-body bg-white" method="POST" enctype="multipart/form-data" action="/manager/products/store">
             <h1 class="text-xl font-semibold mb-5">

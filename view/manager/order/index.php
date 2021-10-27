@@ -1,6 +1,6 @@
 <?php include_view('layouts.header'); ?>
 
-<div class="container mx-auto min-h-screen px-20">
+<div class="container mx-auto min-h-screen py-16">
     <div class="card shadow-md w-full max-w-6xl mx-auto mt-10">
         <div class="card-body bg-white">
             <h1 class="text-xl font-semibold">
