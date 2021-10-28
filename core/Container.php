@@ -111,6 +111,10 @@ class Container
             }
         }
 
+        if ($dependency->getName() === 'array') {
+            return $parameter->getDefaultValue();
+        }
+
         return self::make($dependency->getName());
     }
 }
