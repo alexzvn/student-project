@@ -1,5 +1,5 @@
 <div class="card w-full border border-yellow-300 shadow hover:shadow-lg transition-shadow duration-200">
-    <div class="h-full grid place-items-center">
+    <div class="h-full grid place-items-center p-1">
         <img class="object-cover w-full max-h-70" src="<?= e($product->avatar) ?>" alt="<?= e($product->name) ?>">
     </div>
     <div class="card-body bg-white p-4 pt-3">
