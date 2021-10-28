@@ -32,7 +32,7 @@ abstract class SimpleOrm
             return;
         }
 
-        return static::load($row);
+        return static::hydrate($row);
     }
 
     public static function findBy(string $field, $value)
@@ -43,12 +43,12 @@ abstract class SimpleOrm
             return;
         }
 
-        return static::load($row);
+        return static::hydrate($row);
     }
 
     public function findManyBy(string $field, $value)
     {
-        return static::loadMany(
+        return static::hydrateMany(
             static::exec("SELECT * FROM :table WHERE $field = ?", $value)->get_result()->fetch_all(MYSQLI_ASSOC)
         );
     }
@@ -67,11 +67,11 @@ abstract class SimpleOrm
         if ($mode === static::FETCH_ONE) {
             $result = $result->fetch_assoc();
 
-            return is_null($result) ? null : static::load($result);
+            return is_null($result) ? null : static::hydrate($result);
         }
 
         if ($mode === static::FETCH_MANY) {
-            return static::loadMany($result->fetch_all(MYSQLI_ASSOC));
+            return static::hydrateMany($result->fetch_all(MYSQLI_ASSOC));
         }
 
         return;
@@ -143,7 +143,7 @@ abstract class SimpleOrm
         $this->modifies = [];
     }
 
-    protected static function load(array $attributes)
+    protected static function hydrate(array $attributes)
     {
         $model = new static;
 
@@ -153,10 +153,10 @@ abstract class SimpleOrm
         return $model;
     }
 
-    protected static function loadMany(array $entries)
+    protected static function hydrateMany(array $entries)
     {
         return array_map(function ($attributes) {
-            return static::load($attributes);
+            return static::hydrate($attributes);
         }, $entries);
     }
 
