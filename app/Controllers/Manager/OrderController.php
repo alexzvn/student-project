@@ -9,7 +9,7 @@ class OrderController
     public function index()
     {
         return view('manager.order.index', [
-            'orders' => Order::sql("SELECT * FROM :table ORDER BY :pk DESC")
+            'orders' => Order::sql("SELECT * FROM :table ORDER BY :pk DESC", Order::FETCH_MANY)
         ]);
     }
 
