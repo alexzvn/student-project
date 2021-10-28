@@ -109,6 +109,8 @@ abstract class SimpleOrm
         if ($this->isCreated) {
             static::sql("DELETE FROM :table WHERE :pk = " . $this->{static::$pk});
         }
+
+        $this->isCreated = false;
     }
 
     final protected function insert()
