@@ -58,7 +58,7 @@ abstract class SimpleOrm
         return static::sql("SELECT * FROM :table", static::FETCH_MANY);
     }
 
-    final public static function sql(string $sql, $mode = self::FETCH_NONE)
+    public static function sql(string $sql, $mode = self::FETCH_NONE)
     {
         $sql = str_replace([':table', ':pk'], [static::$table, static::$pk], $sql);
 
@@ -121,7 +121,9 @@ abstract class SimpleOrm
             return ltrim($carry .= ',?', ',');
         }, '');
 
-        static::exec("INSERT INTO :table ($fields) VALUES ($binds)", ...array_values($this->modifies));
+        $query = static::exec("INSERT INTO :table ($fields) VALUES ($binds)", ...array_values($this->modifies));
+
+        $this->attributes[static::$pk] = $query->insert_id;
 
         $this->isCreated = true;
         $this->modifies = [];

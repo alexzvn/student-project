@@ -16,7 +16,7 @@ class Order extends BaseModel
     {
         return OrderItems::sql("SELECT * FROM products
             RIGHT JOIN order_items ON order_items.product_id = products.id
-            WHERE order_id = $this->id");
+            WHERE order_id = $this->id", static::FETCH_MANY);
     }
 
     public function user()

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderItems;
 use App\Models\Product;
 use App\Support\Cart;
 use Core\Http\Auth;
@@ -76,14 +77,12 @@ class CartController
             'user_id' => $auth->user()->id
         ])->save();
 
-        $sql = [];
+        $sql = 'INSERT INTO order_items (product_id, order_id, amount) VALUES (?, ?, ?)';
         foreach ($cart->items() as $item) {
             [$product, $amount] = $item;
 
-            $sql[] = "($product->id, $order->id, $amount)";
+            OrderItems::exec($sql, $product->id, $order->id, $amount);
         }
-
-        Order::sql("INSERT INTO order_items (product_id, order_id, amount) VALUE " . implode(',', $sql), Order::FETCH_NONE);
 
         $cart->clear();
 
