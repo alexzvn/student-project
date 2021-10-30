@@ -21,9 +21,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1; foreach ($orders as $order): $user = $order->user(); ?>
+                    <?php foreach ($orders as $order): $user = $order->user(); ?>
                         <tr>
-                            <th>#<?= $i++ ?></th>
+                            <th>#<?= $order->id ?></th>
                             <td><?= e($user->name) ?></td>
                             <td><?= e($user->address) ?></td>
                             <td>
