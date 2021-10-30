@@ -31,6 +31,6 @@ class OrderController
             session()->flash('alert:success', "Deleted order #$order->id");
         }
 
-        return redirect('/manager/products');
+        return redirect('/manager/orders');
     }
 }

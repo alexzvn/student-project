@@ -52,7 +52,7 @@ class RouterService extends CoreRouterService
 
         $route->get('/manager/orders', [OrderController::class, 'index']);
         $route->get('/manager/orders/{id}', [OrderController::class, 'show']);
-        $route->post('/manager/orders/{id}/delete', [OrderController::class, 'delete']);
+        $route->get('/manager/orders/{id}/delete', [OrderController::class, 'delete']);
     }
 
     public function getDestination()
