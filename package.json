@@ -1,6 +1,8 @@
 {
   "name": "student-project",
   "version": "1.0.0",
+  "author": "Alexzvn",
+  "license": "ISC",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,8 +15,6 @@
     "type": "git",
     "url": "git+https://github.com/alexzvn/student-project.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/alexzvn/student-project/issues"
   },
