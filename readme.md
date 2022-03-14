@@ -1,4 +1,5 @@
 # xShop Project
+[Click here for report document](https://www.overleaf.com/read/fnrnkmcpfzrm)
 
 ## Requirements
 
